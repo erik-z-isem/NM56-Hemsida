@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brf Fågelbärsträdet 5 - Wireframe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2C5F4F;
+            --secondary: #8B4513;
+            --accent: #D4AF37;
+            --bg-light: #FAF9F6;
+            --bg-white: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-medium: #4A4A4A;
+            --border: #E5E5E5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: var(--bg-white);
+            border-bottom: 2px solid var(--primary);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        .site-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-tab {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-medium);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: rgba(44, 95, 79, 0.05);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .hero-banner {
+            width: calc(100% + 6rem);
+            margin: -3rem -3rem 2rem -3rem;
+            height: 20vh;
+            min-height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 50 Q 25 30, 50 50 T 100 50" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="2"/><path d="M0 70 Q 25 50, 50 70 T 100 70" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="2"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 0.75rem;
+            display: inline-block;
+        }
+
+        .contact-section {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(44, 95, 79, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .contact-section h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-white);
+            border-radius: 4px;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateX(5px);
+        }
+
+        .email-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        .email-link:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-medium);
+            transition: all 0.3s ease;
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(44, 95, 79, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-color: var(--primary);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Fullscreen Image Overlay */
+        .image-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .image-overlay.active {
+            display: flex;
+        }
+
+        .image-overlay img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close-overlay {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .close-overlay:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-button {
+            left: 2rem;
+        }
+
+        .next-button {
+            right: 2rem;
+        }
+
+        .image-counter {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-box {
+            background: var(--bg-white);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .info-box:hover {
+            border-color: var(--primary);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+
+        .info-box:hover::before {
+            transform: scaleY(1);
+        }
+
+        .info-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .info-box p {
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .pdf-link.active {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .pdf-link.active:hover {
+            background: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .placeholder-text {
+            color: var(--text-medium);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .site-title {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-tab {
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-tab.active {
+                border-bottom: 1px solid var(--border);
+                border-left: 4px solid var(--accent);
+            }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
+
+            .hero-banner {
+                width: calc(100% + 3rem);
+                margin: -1.5rem -1.5rem 2rem -1.5rem;
+                height: 25vh;
+            }
+
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+
+            main {
+                padding: 1.5rem 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .close-overlay {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+            }
+
+            .nav-button {
+                width: 50px;
+                height: 50px;
+            }
+
+            .prev-button {
+                left: 1rem;
+            }
+
+            .next-button {
+                right: 1rem;
+            }
+
+            .image-overlay img {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="site-title">Brf Fågelbärsträdet 5</h1>
+            <nav>
+                <button class="nav-tab active" data-tab="hem">Hem</button>
+                <button class="nav-tab" data-tab="bilder">Bilder</button>
+                <button class="nav-tab" data-tab="info">Allmän Info</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hem Tab -->
+        <div class="tab-content active" id="hem">
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <h2 style="color: white; border: none; padding: 0; margin: 0;">Välkommen till Brf Fågelbärsträdet 5</h2>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-top: 1rem;">Din bostadsrättsförening</p>
+                </div>
+            </div>
+            <p style="margin-top: 2rem; font-size: 1.1rem; color: var(--text-medium);">
+                Här hittar du information om vår bostadsrättsförening.
+            </p>
+            
+            <div class="contact-section">
+                <h3>Kontakta styrelsen</h3>
+                <div class="contact-info">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <a href="mailto:styrelsen@nm56.se" class="email-link">styrelsen@nm56.se</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bilder Tab -->
+        <div class="tab-content" id="bilder">
+            <h2>Bildgalleri</h2>
+            <p style="color: var(--text-medium); margin-top: 1rem; margin-bottom: 2rem;">
+                <strong>Instruktion:</strong> Lägg dina bilder i en mapp som heter "bilder" i samma katalog som denna HTML-fil. Bilderna laddas automatiskt!
+            </p>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Images will be loaded dynamically -->
+                <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-medium);">
+                    Laddar bilder...
+                </div>
+            </div>
+        </div>
+
+        <!-- Fullscreen overlay for images -->
+        <div class="image-overlay" id="imageOverlay">
+            <button class="close-overlay" id="closeOverlay">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <button class="nav-button prev-button" id="prevButton">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <img src="" alt="" id="overlayImage">
+            <button class="nav-button next-button" id="nextButton">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+            <div class="image-counter" id="imageCounter"></div>
+        </div>
+
+        <!-- Allmän Info Tab -->
+        <div class="tab-content" id="info">
+            <h2>Allmän Information</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>Dokument 1</h3>
+                    <p class="placeholder-text">Beskriv dokumentet här (t.ex. "Årsredovisning 2024")</p>
+                    <a href="#" class="pdf-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                        </svg>
+                        Ladda ner PDF
+                    </a>
+                </div>
+
+                <div class="info-box">
+                    <h3>Dokument 2</h3>
+                    <p class="placeholder-text">Beskriv dokumentet här (t.ex. "Husordningsregler")</p>
+                    <a href="#" class="pdf-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                        </svg>
+                        Ladda ner PDF
+                    </a>
+                </div>
+
+                <div class="info-box">
+                    <h3>Dokument 3</h3>
+                    <p class="placeholder-text">Beskriv dokumentet här (t.ex. "Stadgar")</p>
+                    <a href="#" class="pdf-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                        </svg>
+                        Ladda ner PDF
+                    </a>
+                </div>
+
+                <div class="info-box">
+                    <h3>Dokument 4</h3>
+                    <p class="placeholder-text">Beskriv dokumentet här (t.ex. "Protokoll")</p>
+                    <a href="#" class="pdf-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                        </svg>
+                        Ladda ner PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab switching functionality
+        const tabs = document.querySelectorAll('.nav-tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Dynamic Image Gallery Loading
+        let images = [];
+        let currentImageIndex = 0;
+
+        // List of common image extensions to look for
+        const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp', '.svg'];
+        
+        // For demonstration, we'll create some placeholder images
+        // In production, you would fetch actual images from the 'bilder' folder
+        function loadImages() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            
+            // Example: If you're using a server, you'd fetch the image list like this:
+            // fetch('/api/images') or use a server-side script
+            
+            // For a static site, you need to manually list images or use a build process
+            // Here's a demo array - replace with your actual image paths
+            const imagePaths = [
+                'bilder/image1.jpg',
+                'bilder/image2.jpg',
+                'bilder/image3.jpg',
+                'bilder/image4.jpg',
+                'bilder/image5.jpg',
+                'bilder/image6.jpg'
+            ];
+
+            // Try to load images, if they exist
+            galleryGrid.innerHTML = '';
+            
+            imagePaths.forEach((path, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                
+                const img = document.createElement('img');
+                img.src = path;
+                img.alt = `Bild ${index + 1}`;
+                img.loading = 'lazy';
+                
+                // Handle image load error (if file doesn't exist)
+                img.onerror = function() {
+                    // Create placeholder if image doesn't exist
+                    item.innerHTML = `<span style="font-style: italic;">Bild ${index + 1}</span>`;
+                    item.style.background = 'linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%)';
+                    item.style.border = '2px dashed var(--border)';
+                };
+                
+                // Handle successful load
+                img.onload = function() {
+                    images.push(path);
+                    item.addEventListener('click', () => openOverlay(images.indexOf(path)));
+                };
+                
+                item.appendChild(img);
+                galleryGrid.appendChild(item);
+            });
+
+            // If no images loaded, show message
+            if (images.length === 0) {
+                setTimeout(() => {
+                    if (images.length === 0) {
+                        galleryGrid.innerHTML = `
+                            <div style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--text-medium);">
+                                <p style="font-size: 1.1rem; margin-bottom: 1rem;">Inga bilder hittades ännu.</p>
+                                <p>Skapa en mapp som heter "bilder" och lägg dina bilder där!</p>
+                            </div>
+                        `;
+                    }
+                }, 1000);
+            }
+        }
+
+        // Fullscreen Overlay Functions
+        const overlay = document.getElementById('imageOverlay');
+        const overlayImage = document.getElementById('overlayImage');
+        const closeBtn = document.getElementById('closeOverlay');
+        const prevBtn = document.getElementById('prevButton');
+        const nextBtn = document.getElementById('nextButton');
+        const counter = document.getElementById('imageCounter');
+
+        function openOverlay(index) {
+            if (images.length === 0) return;
+            currentImageIndex = index;
+            showImage();
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOverlay() {
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showImage() {
+            overlayImage.src = images[currentImageIndex];
+            counter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            showImage();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            showImage();
+        }
+
+        // Event Listeners
+        closeBtn.addEventListener('click', closeOverlay);
+        nextBtn.addEventListener('click', nextImage);
+        prevBtn.addEventListener('click', prevImage);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!overlay.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') closeOverlay();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+
+        // Close on background click
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeOverlay();
+        });
+
+        // Load images when page loads
+        loadImages();
+    </script>
+</body>
+</html>
